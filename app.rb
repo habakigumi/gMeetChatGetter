@@ -27,7 +27,7 @@ begin
   driver.find_element(:name, 'password').send_keys '***REMOVED***'
   driver.find_element(:id, 'passwordNext').click
   wait.until {driver.find_element(:class, 'gLFyf').displayed?} # 検索バーが出るまで
-  driver.get 'https://meet.google.com/ahn-hgei-qph'
+  driver.get 'https://meet.google.com/bak-pdnz-fcv'
   wait.until {driver.find_element(:class, 'ZB88ed').displayed?} # カメラオフボタンが出るまで
   driver.find_element(:class, 'ZB88ed').click # マイクオフ
   driver.find_element(:class, 'GOH7Zb').click # ビデオオフ
@@ -38,7 +38,7 @@ begin
   driver.find_elements(:class, 'anXpBf')[1].click # コメント表示タブ
   wait.until {driver.find_element(:class, 'vvTMTb').displayed?} # コメント欄が出るまで
   register_observe driver # observerにスクリプト登録
-  sleep 1000
+  sleep 12*60*60
 rescue Selenium::WebDriver::Error::NoSuchElementError
   p 'no such element error!!'
   return
