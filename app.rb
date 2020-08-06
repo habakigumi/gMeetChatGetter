@@ -1,3 +1,4 @@
+require 'dotenv/load'
 require 'selenium-webdriver'
 require_relative 'tools'
 
@@ -16,18 +17,18 @@ driver = Selenium::WebDriver.for :chrome, options: options
 driver.manage.timeouts.implicit_wait = @timeout
 wait = Selenium::WebDriver::Wait.new(timeout: @wait_time)
 
-# Yahooを開く
+# Googleのログイン
 driver.get('https://accounts.google.com/signin/v2/identifier?hl=ja&passive=true&continue=https%3A%2F%2Fwww.google.co.jp%2F%3Fgws_rd%3Dssl&flowName=GlifWebSignIn&flowEntry=ServiceLogin')
 
 begin
   wait.until{driver.find_element(:id, 'identifierId').displayed?} # メール入力欄が出るまで
-  driver.find_element(:id, 'identifierId').send_keys '***REMOVED***'
+  driver.find_element(:id, 'identifierId').send_keys ENV["EMAIL"]
   driver.find_element(:id, 'identifierNext').click
   wait.until {driver.find_element(:name, 'password').displayed?}
-  driver.find_element(:name, 'password').send_keys '***REMOVED***'
+  driver.find_element(:name, 'password').send_keys ENV["PASSWORD"]
   driver.find_element(:id, 'passwordNext').click
   wait.until {driver.find_element(:class, 'gLFyf').displayed?} # 検索バーが出るまで
-  driver.get 'https://meet.google.com/bak-pdnz-fcv'
+  driver.get "https://meet.google.com/#{ENV["ROOM_KEY"]}"
   wait.until {driver.find_element(:class, 'ZB88ed').displayed?} # カメラオフボタンが出るまで
   driver.find_element(:class, 'ZB88ed').click # マイクオフ
   driver.find_element(:class, 'GOH7Zb').click # ビデオオフ
