@@ -2,7 +2,7 @@
   let lastSender = null;
   const sendMessage = async (sender, text) => {
     const room_key = window.location.href.split("/").slice(-1)[0];
-    const res = await fetch(`http://127.0.0.1:3000/rooms/${room_key}/messages`, {
+    const res = await fetch(`https://super-meet.herokuapp.com/rooms/${room_key}/messages`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
